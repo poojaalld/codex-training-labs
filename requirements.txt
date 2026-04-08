@@ -1,0 +1,6 @@
+fastapi>=0.110.1
+uvicorn[standard]>=0.23.0
+python-jose[cryptography]>=3.3.0
+pydantic>=2.7.0
+pytest>=7.5.0
+requests>=2.32.0

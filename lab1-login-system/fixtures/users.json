@@ -1,0 +1,16 @@
+[
+  {
+    "username": "demo-user",
+    "full_name": "Demo User",
+    "email": "demo@example.com",
+    "hashed_password": "RFdzbZm/MuLlIxwMG1/0GrtPLXvXfweKphoQ7ZvXCYQ=",
+    "disabled": false
+  },
+  {
+    "username": "disabled-user",
+    "full_name": "Disabled User",
+    "email": "disabled@example.com",
+    "hashed_password": "RFdzbZm/MuLlIxwMG1/0GrtPLXvXfweKphoQ7ZvXCYQ=",
+    "disabled": true
+  }
+]
