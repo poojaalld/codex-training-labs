@@ -32,3 +32,12 @@ C:\Users\pooja\codex-training-labs\fullstack-codex-lab\backend-dotnet\obj\Debug\
 C:\Users\pooja\codex-training-labs\fullstack-codex-lab\backend-dotnet\obj\Debug\net10.0\backend-dotnet.pdb
 C:\Users\pooja\codex-training-labs\fullstack-codex-lab\backend-dotnet\obj\Debug\net10.0\backend-dotnet.genruntimeconfig.cache
 C:\Users\pooja\codex-training-labs\fullstack-codex-lab\backend-dotnet\obj\Debug\net10.0\ref\backend-dotnet.dll
+C:\Users\pooja\codex-training-labs\fullstack-codex-lab\backend-dotnet\bin\Debug\net10.0\package-lock.json
+C:\Users\pooja\codex-training-labs\fullstack-codex-lab\backend-dotnet\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\pooja\codex-training-labs\fullstack-codex-lab\backend-dotnet\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\pooja\codex-training-labs\fullstack-codex-lab\backend-dotnet\bin\Debug\net10.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\pooja\codex-training-labs\fullstack-codex-lab\backend-dotnet\bin\Debug\net10.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\pooja\codex-training-labs\fullstack-codex-lab\backend-dotnet\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\pooja\codex-training-labs\fullstack-codex-lab\backend-dotnet\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\pooja\codex-training-labs\fullstack-codex-lab\backend-dotnet\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\pooja\codex-training-labs\fullstack-codex-lab\backend-dotnet\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
