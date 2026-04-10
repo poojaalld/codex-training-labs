@@ -14,7 +14,7 @@ How to run
 ----------
 1. In a terminal:
    ```
-   cd lab7-prompt-engineering/codex-training-course/modules/module-01-introduction-to-codex/labs/intro-prompt-ui/backend
+   cd modules/module-01-introduction-to-codex/labs/intro-prompt-ui/backend
    npm install
    npm start
    ```
@@ -22,7 +22,7 @@ How to run
 
 2. Open a second terminal:
    ```
-   cd .../frontend
+   cd modules/module-01-introduction-to-codex/labs/intro-prompt-ui/frontend
    npm install
    npm run dev
    ```

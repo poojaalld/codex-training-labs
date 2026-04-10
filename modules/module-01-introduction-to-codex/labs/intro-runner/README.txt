@@ -1,8 +1,8 @@
-Module 1 · Lab 1.2 — Live Prompt Run Demo
+Module 1 - Lab 1.2 - Live Prompt Run Demo
 
 Overview
 --------
-This lab leads participants through a ”prompt runner” experience: a React UI sends a request to a Node/Express backend, which simulates Codex generating code and executing a simple pipeline, then returns the run log.
+This lab walks through a live prompt-runner experience: a React UI posts a natural-language request to a Node/Express backend, the backend simulates Codex generating code and running a tiny pipeline, and the UI displays the generated logs.
 
 Prerequisites
 -------------
@@ -10,30 +10,30 @@ Prerequisites
 
 Setup
 -----
-1. Launch backend:
+1. Launch the backend from the repo root:
    ```
-   cd lab7-prompt-engineering/codex-training-course/modules/module-01-introduction-to-codex/labs/intro-runner/backend
+   cd modules/module-01-introduction-to-codex/labs/intro-runner/backend
    npm install
    npm start
    ```
    The runner backend listens on http://localhost:5301/exe.
 
-2. Start the frontend:
+2. In a second terminal, start the frontend:
    ```
-   cd .../frontend
+   cd modules/module-01-introduction-to-codex/labs/intro-runner/frontend
    npm install
    npm run dev
    ```
-   Visit http://localhost:5174 to access the runner UI.
+   The React UI opens on http://localhost:5174 and talks to the backend.
 
 How to use
 ----------
-1. Paste a description such as “Generate a helper that formats a patient summary” and click “Run Prompt”.
-2. The UI shows logs from each step: the generated code snippet, run result, and runner status.
-3. Modify `server.js` to return different run statuses (review/done) based on prompt length to simulate a multi-stage pipeline.
+1. Paste a description such as "Generate a helper that formats a patient summary" and click Run Prompt.
+2. Watch the UI show logs for each step: the generated snippet, the execution result, and the runner status.
+3. Tweak `server.js` to return different statuses (review/done) based on prompt length or keywords to simulate a multi-stage workflow.
 
 Learning outcome
 ----------------
-- Observe how a single prompt results in a code snippet plus metadata/logs.
-- Capture the “natural-language → code → execution” cycle that will be referenced in Module 1’s live demo.
-- Extend the UI to show a fake “deploy” step or parallel logs before moving to Module 2 labs.
+- Observe how natural language is turned into code plus metadata and logs.
+- Capture the natural-language -> code -> execution cycle referenced in Module 1.
+- Extend the UI to show a fake deploy step or parallel log streams before moving on to Module 2 labs.
