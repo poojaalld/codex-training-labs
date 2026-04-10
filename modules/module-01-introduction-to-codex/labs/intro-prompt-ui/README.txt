@@ -1,37 +1,30 @@
-Module 1 · Lab 1.1 — Prompt-to-Function Starter
+Intro Prompt UI Lab · Todo List
+------------------------------
+This lab replaces the previous intro prompt UI with a lightweight todo list experience that demonstrates how to keep a React form in sync with a Node/Express API. The frontend submits new tasks to the backend, which retains them in memory and returns the updated list for display.
 
-Overview
---------
-This lab demonstrates how a Codex-style service turns a single natural-language prompt into a callable function stub.
-The frontend presents a textarea and submit button (React + Vite) while the backend is a tiny Express server that returns a hard-coded function based on keywords.
-
-Prerequisites
--------------
-1. Node.js 18+ installed.
-2. `npm` on your PATH.
-
-How to run
-----------
-1. In a terminal:
+## Running the lab
+1. Backend:
    ```
    cd modules/module-01-introduction-to-codex/labs/intro-prompt-ui/backend
    npm install
    npm start
    ```
-   This starts the Express server on http://localhost:5201.
+   The server listens on port 5200 and exposes `/api/tasks` for both fetching and adding todo items.
 
-2. Open a second terminal:
+2. Frontend:
    ```
    cd modules/module-01-introduction-to-codex/labs/intro-prompt-ui/frontend
    npm install
    npm run dev
    ```
-   The React UI runs on http://localhost:5173 and automatically talks to the backend.
+   Vite serves the UI on `http://localhost:5175/` and proxies `/api` to the backend so the dev server can talk to the API without CORS issues.
 
-3. Type a prompt (e.g., “build a sum helper”) and submit. The backend returns a pseudo-Codex response containing `generatedCode`, a `functionName`, and metadata.
+Once both servers are running, open the frontend URL, type a task into the box, then click “Add Task” to see it appear at the top of the list.
 
-What to explore
----------------
-- Observe how prompt keywords (“sum”, “greeting”) affect the returned stub.
-- Compare this with how GitHub Copilot might insert inline completions when the same prompt is typed directly in an editor.
-- Extend `backend/index.js` to detect new keywords or return multiple suggestions to feel like a prompt playground.
+## API surface overview
+- `GET /api/tasks` — returns `{ tasks: [{ id, text }] }` with the newest entries first so the UI can render them immediately after loading.
+- `POST /api/tasks` — accepts `{ text: string }`, rejects empty submissions with a 400 error, and replies with `{ task: { id, text } }`.
+
+## Notes
+- Tasks live only in memory. Stopping the backend clears the saved list.
+- The frontend displays error banners if it cannot reach the backend or if the POST request is rejected, so you can see what needs to be fixed before retrying.

@@ -1,81 +1,100 @@
-import { useState } from "react";
-
-const API_URL = "http://localhost:5201/api/generate";
+import { useEffect, useState } from 'react';
 
 export default function App() {
-  const [prompt, setPrompt] = useState("");
-  const [result, setResult] = useState(null);
-  const [status, setStatus] = useState("idle");
+  const [taskText, setTaskText] = useState('');
+  const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    loadTasks();
+  }, []);
+
+  const loadTasks = async () => {
+    setLoading(true);
+    setError('');
+    try {
+      const response = await fetch('/api/tasks');
+      if (!response.ok) {
+        throw new Error('Failed to load tasks');
+      }
+      const data = await response.json();
+      setTasks(data.tasks);
+    } catch (err) {
+      setError('Unable to reach the backend. Please start the server first.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setStatus("loading");
-    setResult(null);
+    if (!taskText.trim()) return;
+    setLoading(true);
+    setError('');
 
     try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ prompt })
+      const response = await fetch('/api/tasks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: taskText })
       });
 
       if (!response.ok) {
-        throw new Error(`Server returned ${response.status}`);
+        throw new Error('Could not save task');
       }
 
-      const body = await response.json();
-      setResult(body);
-      setStatus("success");
-    } catch (error) {
-      setResult({ success: false, error: error.message });
-      setStatus("error");
+      const data = await response.json();
+      setTasks([data.task, ...tasks]);
+      setTaskText('');
+    } catch (err) {
+      setError('Something went wrong while saving this task.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="shell">
-      <header>
-        <p>Module 1 Live Demo</p>
-        <h1>Prompt to Function</h1>
-        <p>
-          Type a simple description and watch Codex-style logic return a
-          stubbed function.
-        </p>
-      </header>
+    <div className="app-shell">
+      <main className="card">
+        <header>
+          <p className="eyebrow">Module 01 · Todo UI</p>
+          <h1>Your simple todo list</h1>
+          <p>Type a task in the box below and press “Add Task”.</p>
+        </header>
 
-      <form onSubmit={handleSubmit}>
-        <label>
-          Prompt
-          <textarea
-            value={prompt}
-            onChange={(event) => setPrompt(event.target.value)}
-            placeholder="e.g., Build a sum helper that adds two numbers"
-          />
-        </label>
-        <button type="submit" disabled={!prompt.trim() || status === "loading"}>
-          {status === "loading" ? "Generating…" : "Generate Function"}
-        </button>
-      </form>
+        <form className="task-form" onSubmit={handleSubmit}>
+          <label htmlFor="new-task">New task</label>
+          <div className="input-row">
+            <input
+              id="new-task"
+              value={taskText}
+              onChange={(event) => setTaskText(event.target.value)}
+              placeholder="Buy milk, plan presentation, etc."
+            />
+            <button type="submit" disabled={loading}>
+              {loading ? 'Saving…' : 'Add Task'}
+            </button>
+          </div>
+        </form>
 
-      {status === "error" && <p className="error">Failed to fetch result.</p>}
+        {error && <p className="error">{error}</p>}
 
-      {result && (
-        <section className="result">
-          <h2>Generation Result</h2>
-          <p>{result.message}</p>
-          {result.generatedCode && (
-            <>
-              <h3>Function: {result.functionName}</h3>
-              <pre>{result.generatedCode}</pre>
-            </>
-          )}
-          {result.metadata && (
-            <small>Generated at {result.metadata.generatedAt}</small>
+        <section className="task-list">
+          <h2>Tasks</h2>
+          {loading && tasks.length === 0 ? (
+            <p className="muted">Loading tasks…</p>
+          ) : sortedTasks.length === 0 ? (
+            <p className="muted">Task list is empty. Add something above.</p>
+          ) : (
+            <ul>
+              {tasks.map((task) => (
+                <li key={task.id}>{task.text}</li>
+              ))}
+            </ul>
           )}
         </section>
-      )}
+      </main>
     </div>
   );
 }

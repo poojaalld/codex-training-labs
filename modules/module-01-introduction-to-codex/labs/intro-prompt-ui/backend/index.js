@@ -1,59 +1,29 @@
-import express from "express";
-import cors from "cors";
+const express = require('express');
+const cors = require('cors');
 
-const PORT = 5201;
 const app = express();
-
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors());
 app.use(express.json());
 
-const stubResolver = (prompt) => {
-  const normalized = (prompt ?? "").toLowerCase();
-  if (normalized.includes("sum")) {
-    return {
-      name: "calculateSum",
-      code: "function calculateSum(a, b) {\n  return a + b;\n}"
-    };
-  }
+const tasks = [];
+let nextId = 1;
 
-  if (normalized.includes("greeting")) {
-    return {
-      name: "sayGreeting",
-      code: "function sayGreeting(name) {\n  return `Hello, ${name}!`;\n}"
-    };
-  }
-
-  return {
-    name: "placeholderFunction",
-    code: "function placeholderFunction() {\n  // replace this stub with your generated logic\n}"
-  };
-};
-
-app.post("/api/generate", (req, res) => {
-  const { prompt } = req.body ?? {};
-  const timestamp = new Date().toISOString();
-  const generated = stubResolver(prompt);
-
-  res.json({
-    success: true,
-    message: "Function stub generated from your prompt.",
-    prompt: prompt ?? "",
-    generatedCode: generated.code,
-    functionName: generated.name,
-    metadata: {
-      language: "javascript",
-      generatedAt: timestamp
-    }
-  });
+app.get('/api/tasks', (req, res) => {
+  res.json({ tasks });
 });
 
-app.get("/api/health", (_req, res) => {
-  res.json({
-    success: true,
-    status: "ready"
-  });
+app.post('/api/tasks', (req, res) => {
+  const text = typeof req.body.text === 'string' ? req.body.text.trim() : '';
+  if (!text) {
+    return res.status(400).json({ error: 'Please provide a non-empty task text' });
+  }
+
+  const task = { id: nextId++, text };
+  tasks.unshift(task);
+  res.status(201).json({ task });
 });
 
-app.listen(PORT, () => {
-  console.log(`Intro prompt UI backend listening on http://localhost:${PORT}`);
+const port = process.env.PORT || 5200;
+app.listen(port, () => {
+  console.log(`Todo API listening on http://localhost:${port}`);
 });
