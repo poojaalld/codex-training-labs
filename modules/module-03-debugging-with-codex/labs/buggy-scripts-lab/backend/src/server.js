@@ -78,7 +78,7 @@ function calculateBonus(amount, level) {
 +}
 +
 +if (!user) {
-+  console.log("No user payload supplied. Provide a JSON object with a `roles` array.");
++  console.log("No user payload supplied. Provide a JSON object with a 'roles' array.");
 +} else {
 +  console.log("User access:", describeAccess(user));
 +}`,
