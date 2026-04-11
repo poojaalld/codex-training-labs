@@ -1,19 +1,18 @@
-# Module 6: Test-Driven Development (TDD) (1 Hour)
+# Module 6: Test-Driven Development (2 Hours)
 
 ## Focus
-- Prompt Codex to generate unit tests from function signatures or human-readable requirements.
-- Improve test coverage by asking Codex to identify gaps and produce missing assertions.
+- Build a minimal React + Node ToDo stack so you can iterate quickly on features and keep server data in sync with the UI.
+- Capture the testing story for each reliability layer (unit, integration, API, end-to-end, performance, security, regression, smoke, and acceptance).
 
 ## Labs structure (1–2 hours each)
-> Each lab includes a small React UI for entering requirements and reviewing generated tests, plus a simple Node/Express backend that returns mocked test files and coverage hints.
 
-### Lab 6.1 – Test Generator (labs/test-generator)
-- Deliverables: React form with inputs for the function name, description, and edge cases; Node/Express endpoint emits unit test suggestions (Jest for React service, Mocha for backend) and explains the assertion logic.
-- Learning: experiment with prompt templates to request parameterized tests, snapshot checks, and asynchronous assertions.
+### Lab 6.1 – ToDo first pass (todo-app)
+- Deliverables: a React frontend running in Vite that submits tasks and reads the list maintained by a Node/Express backend with in-memory persistence.
+- Learning: practice adding a task, hitting `/tasks`, and toggling completion while keeping the UI reactive to the saved state.
 
-### Lab 6.2 – Coverage Improvement Sprint (labs/coverage-improvement)
-- Deliverables: Minimal Node service that exposes one uncovered route; React UI submits the current coverage stats, and the backend responds with a Codex-generated list of missing tests plus stub code.
-- Learning: interpret coverage reports, convert gaps into targeted prompts, and keep the React/Express starter code tiny (a single component + one router).
+### Lab 6.2 – Testing second pass (testing-prompts)
+- Deliverables: this folder lists example prompts and commands for generating automated test suites across all major categories (unit, integration, end-to-end, front-end, API, performance, security, regression, smoke, acceptance).
+- Learning: clarify which inputs or prompts to feed to AIs or human writers when you want to capture each testing dimension for the stack.
 
-### Exercise note
-Record how each lab keeps file counts low but demonstrates the full TDD loop: requirement ? prompt ? generated tests ? coverage review.
+## Module wrap-up
+Point future work at `todo-app/README.md` for running instructions and `testing-prompts/README.md` for the testing prompts checklist. You can extend the backend with database storage or hook the test prompts folder into CI jobs when you formalize the suites.
