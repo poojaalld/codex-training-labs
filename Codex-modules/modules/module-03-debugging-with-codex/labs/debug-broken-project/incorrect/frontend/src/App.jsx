@@ -1,6 +1,6 @@
-﻿import { useState } from "react";
+import React, { useState } from "react";
 
-const AUTH_ENDPOINT = "http://localhost:5000/logn";
+const AUTH_ENDPOINT = "http://localhost:5055/login";
 
 export default function App() {
   const [userId, setUserId] = useState("");
@@ -9,7 +9,7 @@ export default function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (event) => {
-    // Missing event.preventDefault() so the form reloads before we can read the server response
+    event.preventDefault();
     setStatus("Signing in...");
     setIsSubmitting(true);
 

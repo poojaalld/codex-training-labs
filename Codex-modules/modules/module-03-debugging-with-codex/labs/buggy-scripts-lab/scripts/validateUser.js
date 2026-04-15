@@ -2,7 +2,12 @@ const userPayload = process.argv[2];
 const user = userPayload ? JSON.parse(userPayload) : undefined;
 
 function describeAccess(u) {
-  return u.roles.map((role) => role.toUpperCase()).join(", ");
+  const roles = u?.roles ?? [];
+  return roles.map((role) => role.toUpperCase()).join(", ");
 }
 
-console.log("User access:", describeAccess(user));
+if (!user) {
+  console.log("No user payload supplied. Provide a JSON object with a 'roles' array.");
+} else {
+  console.log("User access:", describeAccess(user));
+}

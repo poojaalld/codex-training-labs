@@ -1,17 +1,23 @@
-﻿const express = require("express");
+const express = require("express");
 const cors = require("cors");
 
 const app = express();
 app.use(cors());
-// Missing express.json() so req.body will be undefined and destructuring errors out
+app.use(express.json());
 
 const users = {
   learner: "pass123",
   demo: "codex"
 };
 
+app.get("/login", (req, res) => {
+  return res.json({
+    message: "Use POST /login with a JSON body containing userId and password."
+  });
+});
+
 app.post("/login", (req, res) => {
-  const { userId, password } = req.body;
+  const { userId, password } = req.body ?? {};
   if (!userId || !password) {
     return res.status(400).json({ error: "Enter both user ID and password." });
   }
@@ -24,7 +30,7 @@ app.post("/login", (req, res) => {
   return res.json({ message: "Sign in successful" });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5055;
 app.listen(PORT, () => {
-  console.log(Auth backend (incorrect) listening on port );
+  console.log(`Auth backend listening on port ${PORT}`);
 });
