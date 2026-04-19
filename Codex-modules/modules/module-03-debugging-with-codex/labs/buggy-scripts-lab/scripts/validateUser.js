@@ -1,8 +1,24 @@
 const userPayload = process.argv[2];
-const user = userPayload ? JSON.parse(userPayload) : undefined;
+let user;
+
+if (userPayload) {
+  try {
+    user = JSON.parse(userPayload);
+  } catch (error) {
+    console.error("Invalid user JSON.");
+  }
+}
 
 function describeAccess(u) {
-  return u.roles.map((role) => role.toUpperCase()).join(", ");
+  if (!u) {
+    return "NO USER PROVIDED";
+  }
+
+  if (!Array.isArray(u.roles) || u.roles.length === 0) {
+    return "NO ROLES ASSIGNED";
+  }
+
+  return u.roles.map((role) => String(role).toUpperCase()).join(", ");
 }
 
 console.log("User access:", describeAccess(user));
