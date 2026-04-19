@@ -1,0 +1,472 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R 6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R] /Count 7 >>
+endobj
+3 0 obj
+<< /Length 1747 >>
+stream
+BT
+/F1 11 Tf
+72 770 Td
+14 TL
+(MYNTRA-STYLE STORE WEBSITE DOCUMENTATION) Tj
+T* () Tj
+T* () Tj
+T* (PURPOSE) Tj
+T* () Tj
+T* (This document explains the current Myntra-style storefront in) Tj
+T* (`module4/myntra-style-store` so that a new learner, reviewer, or mentor can quickly) Tj
+T* (understand:) Tj
+T* () Tj
+T* (- what the website does,) Tj
+T* (- how the frontend and backend are connected,) Tj
+T* (- how to run it locally,) Tj
+T* (- what is already implemented,) Tj
+T* (- and which improvements are suggested in `module4/top-up-ideas`.) Tj
+T* () Tj
+T* (PROJECT SNAPSHOT) Tj
+T* () Tj
+T* (The project is a small full-stack demo store inspired by Myntra's merchandising style.) Tj
+T* (It uses:) Tj
+T* () Tj
+T* (- **Frontend:** React 19 with Vite) Tj
+T* (- **Backend:** Express 5 on Node.js) Tj
+T* (- **Communication:** REST API over `http://localhost:5174/api/products`) Tj
+T* (- **UI style:** marketing-led landing page with product cards, category blocks, hero) Tj
+T* (  section, and architecture summary panels) Tj
+T* () Tj
+T* (The application is intentionally lightweight and well suited for learning component) Tj
+T* (structure, API consumption, responsive layout, and simple documentation practices.) Tj
+T* () Tj
+T* (FOLDER STRUCTURE) Tj
+T* () Tj
+T* () Tj
+T* (module4/) Tj
+T* (  myntra-style-store/) Tj
+T* (    backend/) Tj
+T* (      index.js) Tj
+T* (      package.json) Tj
+T* (    frontend/) Tj
+T* (      package.json) Tj
+T* (      src/) Tj
+T* (        main.jsx) Tj
+T* (        App.jsx) Tj
+T* (        App.css) Tj
+T* (        index.css) Tj
+T* (  top-up-ideas/) Tj
+T* (    modification-ideas.md) Tj
+T* (    docs/) Tj
+T* (      codebase-understanding.md) Tj
+T* (      report-prompts.md) Tj
+T* (      summary-prompts.md) Tj
+T* () Tj
+T* () Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 3 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+5 0 obj
+<< /Length 1838 >>
+stream
+BT
+/F1 11 Tf
+72 770 Td
+14 TL
+(WHAT THE WEBSITE CURRENTLY DOES) Tj
+T* () Tj
+T* (1. Frontend experience) Tj
+T* () Tj
+T* (The frontend renders a single-page shopping showcase with these major sections:) Tj
+T* () Tj
+T* (- **Sticky header** with navigation links and a login/explore CTA) Tj
+T* (- **Hero section** describing the concept and showing runtime status) Tj
+T* (- **Live categories** generated from the fetched product data) Tj
+T* (- **Product spotlight grid** showing curated items) Tj
+T* (- **System map & telemetry** cards summarizing the stack) Tj
+T* (- **Footer** pointing users to source files and run instructions) Tj
+T* () Tj
+T* (2. Backend experience) Tj
+T* () Tj
+T* (The backend exposes one main endpoint:) Tj
+T* () Tj
+T* (- `GET /api/products`) Tj
+T* () Tj
+T* (This endpoint returns:) Tj
+T* () Tj
+T* (- a `banner` string for the hero highlights) Tj
+T* (- a `curated` product array) Tj
+T* () Tj
+T* (Each product includes:) Tj
+T* () Tj
+T* (- `id`) Tj
+T* (- `name`) Tj
+T* (- `price`) Tj
+T* (- `currency`) Tj
+T* (- `badge`) Tj
+T* (- `category`) Tj
+T* (- `description`) Tj
+T* (- `delivery`) Tj
+T* (- `priceFormatted`) Tj
+T* () Tj
+T* (The backend calculates `priceFormatted` using `Intl.NumberFormat\("en-IN"\)`, which keeps) Tj
+T* (INR presentation consistent for the frontend.) Tj
+T* () Tj
+T* (ARCHITECTURE OVERVIEW) Tj
+T* () Tj
+T* (Frontend flow) Tj
+T* () Tj
+T* (1. `frontend/src/main.jsx` mounts the React app into `#root`.) Tj
+T* (2. `frontend/src/App.jsx` manages page state.) Tj
+T* (3. On first render, `useEffect` calls `fetch\("http://localhost:5174/api/products"\)`.) Tj
+T* (4. The frontend stores:) Tj
+T* (   - `products`) Tj
+T* (   - `banner`) Tj
+T* (   - `status`) Tj
+T* (5. `useMemo` derives unique categories from the fetched product list.) Tj
+T* (6. The UI updates based on loading, ready, or error state.) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 5 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+7 0 obj
+<< /Length 1672 >>
+stream
+BT
+/F1 11 Tf
+72 770 Td
+14 TL
+() Tj
+T* (Backend flow) Tj
+T* () Tj
+T* (1. `backend/index.js` creates an Express app.) Tj
+T* (2. `cors\(\)` and `express.json\(\)` middleware are enabled.) Tj
+T* (3. A hard-coded in-memory `products` array acts as the catalog.) Tj
+T* (4. `/api/products` formats prices and returns JSON.) Tj
+T* (5. The server listens on port `5174` by default.) Tj
+T* () Tj
+T* (DATA FLOW) Tj
+T* () Tj
+T* (The most important flow in the project is:) Tj
+T* () Tj
+T* () Tj
+T* (Express product data) Tj
+T* (  -> /api/products response) Tj
+T* (  -> React fetch in App.jsx) Tj
+T* (  -> setBanner / setProducts / setStatus) Tj
+T* (  -> category extraction with useMemo) Tj
+T* (  -> product cards and category panels render on screen) Tj
+T* () Tj
+T* () Tj
+T* (This makes the project a good example of separating:) Tj
+T* () Tj
+T* (- **data provisioning** on the backend,) Tj
+T* (- **state handling** in React,) Tj
+T* (- and **presentation styling** in CSS.) Tj
+T* () Tj
+T* (KEY FILES AND RESPONSIBILITIES) Tj
+T* () Tj
+T* (`frontend/src/main.jsx`) Tj
+T* () Tj
+T* (- React entry point) Tj
+T* (- wraps the app in `StrictMode`) Tj
+T* (- mounts `<App />`) Tj
+T* () Tj
+T* (`frontend/src/App.jsx`) Tj
+T* () Tj
+T* (- contains the page layout) Tj
+T* (- holds data-fetching logic) Tj
+T* (- derives category labels) Tj
+T* (- renders product cards) Tj
+T* (- handles loading and error UI) Tj
+T* () Tj
+T* (`frontend/src/App.css`) Tj
+T* () Tj
+T* (- provides the complete page styling) Tj
+T* (- defines layout, spacing, gradients, cards, chips, footer, and responsive rules) Tj
+T* () Tj
+T* (`frontend/src/index.css`) Tj
+T* () Tj
+T* (- defines base CSS variables and font imports) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 7 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+9 0 obj
+<< /Length 2092 >>
+stream
+BT
+/F1 11 Tf
+72 770 Td
+14 TL
+(- sets base document styling) Tj
+T* () Tj
+T* (`backend/index.js`) Tj
+T* () Tj
+T* (- creates the API) Tj
+T* (- stores sample products) Tj
+T* (- formats INR prices) Tj
+T* (- returns the catalog payload) Tj
+T* () Tj
+T* (UI AND UX CHARACTERISTICS) Tj
+T* () Tj
+T* (The current interface is visually strong for a learning project:) Tj
+T* () Tj
+T* (- warm gradient hero section) Tj
+T* (- card-based merchandising layout) Tj
+T* (- responsive product grid) Tj
+T* (- clear visual grouping between content sections) Tj
+T* (- visible runtime states such as loading and backend connection status) Tj
+T* () Tj
+T* (The design communicates an ecommerce showcase rather than a complete shopping platform.) Tj
+T* (That is appropriate for a training repo, but it also shows where future improvements can) Tj
+T* (be made.) Tj
+T* () Tj
+T* (CURRENT STRENGTHS) Tj
+T* () Tj
+T* (- Simple and easy-to-follow architecture) Tj
+T* (- Clear separation between frontend and backend) Tj
+T* (- Useful example of React state + API integration) Tj
+T* (- Server-side price formatting reduces duplication in the client) Tj
+T* (- Responsive CSS structure already exists) Tj
+T* (- Product cards are reusable and data-driven) Tj
+T* () Tj
+T* (CURRENT GAPS AND LIMITATIONS) Tj
+T* () Tj
+T* (While the project is clean and understandable, it is still a demo implementation.) Tj
+T* (Important limitations include:) Tj
+T* () Tj
+T* (- Only one API endpoint exists) Tj
+T* (- Product data is hard-coded in memory) Tj
+T* (- No database or file-based persistence) Tj
+T* (- No cart, filters, authentication, or checkout flow) Tj
+T* (- Minimal error handling on the backend) Tj
+T* (- No tests for API response shape) Tj
+T* (- No request logging) Tj
+T* (- No loading skeletons or empty-state polish) Tj
+T* (- Some text in the UI appears to have encoding issues such as `??` and `???`) Tj
+T* () Tj
+T* (These are useful talking points in an improvement document because they distinguish the) Tj
+T* (current demo from a more production-ready store.) Tj
+T* () Tj
+T* (IMPROVEMENT IDEAS FROM `TOP-UP-IDEAS`) Tj
+T* () Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 9 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+11 0 obj
+<< /Length 1691 >>
+stream
+BT
+/F1 11 Tf
+72 770 Td
+14 TL
+(The repository already includes a strong improvement roadmap. Below is a simplified) Tj
+T* (explanation of each idea and why it matters.) Tj
+T* () Tj
+T* (1. Mega menu for Indian festivals) Tj
+T* () Tj
+T* (Add a richer navigation experience with hoverable dropdowns for festive and artisan) Tj
+T* (collections.) Tj
+T* () Tj
+T* (**Why it helps:**) Tj
+T* () Tj
+T* (- improves discoverability) Tj
+T* (- makes the header feel more ecommerce-like) Tj
+T* (- introduces accessibility considerations such as ARIA states) Tj
+T* () Tj
+T* (2. Filterable product drawer) Tj
+T* () Tj
+T* (Add frontend state for:) Tj
+T* () Tj
+T* (- price range) Tj
+T* (- delivery speed) Tj
+T* (- category) Tj
+T* () Tj
+T* (**Why it helps:**) Tj
+T* () Tj
+T* (- turns the page from static showcase into an interactive catalog) Tj
+T* (- teaches derived state and conditional rendering) Tj
+T* (- improves product browsing usability) Tj
+T* () Tj
+T* (3. Localized offer banner) Tj
+T* () Tj
+T* (Replace the static status card or banner content with rotating offers such as:) Tj
+T* () Tj
+T* (- Diwali Flash Sale) Tj
+T* (- Metro Express Delivery) Tj
+T* (- Local Artisan Week) Tj
+T* () Tj
+T* (**Why it helps:**) Tj
+T* () Tj
+T* (- makes the hero area more dynamic) Tj
+T* (- is a good use case for timed state updates and CSS animations) Tj
+T* () Tj
+T* (4. Mini cart experience) Tj
+T* () Tj
+T* (Add cart state, totals, and `localStorage` persistence.) Tj
+T* () Tj
+T* (**Why it helps:**) Tj
+T* () Tj
+T* (- introduces a real shopping interaction) Tj
+T* (- demonstrates state synchronization and side effects) Tj
+T* (- makes the project closer to an actual store flow) Tj
+T* () Tj
+T* (5. Backend polish) Tj
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 11 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+13 0 obj
+<< /Length 1593 >>
+stream
+BT
+/F1 11 Tf
+72 770 Td
+14 TL
+() Tj
+T* (Move the catalog to a JSON file or mock DB, add logging, and validate responses with) Tj
+T* (Jest or a script.) Tj
+T* () Tj
+T* (**Why it helps:**) Tj
+T* () Tj
+T* (- improves maintainability) Tj
+T* (- prepares the backend for growth) Tj
+T* (- introduces operational engineering habits) Tj
+T* () Tj
+T* (6. Technical documentation update) Tj
+T* () Tj
+T* (Run tools like ESLint or Lighthouse and capture findings in a report.) Tj
+T* () Tj
+T* (**Why it helps:**) Tj
+T* () Tj
+T* (- creates an evidence-based improvement process) Tj
+T* (- helps learners connect code quality with documentation) Tj
+T* () Tj
+T* (RECOMMENDED PRIORITY ORDER) Tj
+T* () Tj
+T* (If the team wants to improve the project in a practical sequence, this order makes) Tj
+T* (sense:) Tj
+T* () Tj
+T* (1. Fix text encoding issues and improve copy consistency) Tj
+T* (2. Add backend logging and move product data to a JSON source) Tj
+T* (3. Add filterable product drawer) Tj
+T* (4. Add mini cart with local storage) Tj
+T* (5. Add rotating localized offer banner) Tj
+T* (6. Add mega menu and accessibility states) Tj
+T* (7. Run lint/performance review and update technical docs) Tj
+T* () Tj
+T* (This order starts with stability and clarity, then moves into richer UX features.) Tj
+T* () Tj
+T* (LOCAL RUN INSTRUCTIONS) Tj
+T* () Tj
+T* (Backend) Tj
+T* () Tj
+T* () Tj
+T* (cd module4/myntra-style-store/backend) Tj
+T* (npm install) Tj
+T* (npm start) Tj
+T* () Tj
+T* () Tj
+T* (The backend should run on:) Tj
+T* () Tj
+T* () Tj
+T* (http://localhost:5174) Tj
+T* () Tj
+T* () Tj
+T* (Frontend) Tj
+T* () Tj
+ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 13 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+15 0 obj
+<< /Length 1452 >>
+stream
+BT
+/F1 11 Tf
+72 770 Td
+14 TL
+() Tj
+T* (cd module4/myntra-style-store/frontend) Tj
+T* (npm install) Tj
+T* (npm run dev) Tj
+T* () Tj
+T* () Tj
+T* (The frontend should run on:) Tj
+T* () Tj
+T* () Tj
+T* (http://localhost:5173) Tj
+T* () Tj
+T* () Tj
+T* (SUGGESTED TALKING POINTS FOR PRESENTATION OR HANDOVER) Tj
+T* () Tj
+T* (If this document is used in a class, demo, or internal handover, these are the best) Tj
+T* (points to highlight:) Tj
+T* () Tj
+T* (- The website is a demo ecommerce storefront built for learning, not a full shopping) Tj
+T* (  platform.) Tj
+T* (- React handles UI composition and API-driven rendering.) Tj
+T* (- Express acts as a lightweight catalog service.) Tj
+T* (- The current codebase is intentionally small, so learners can understand the full) Tj
+T* (  request-response cycle quickly.) Tj
+T* (- The `top-up-ideas` folder gives a ready-made roadmap for turning the demo into a) Tj
+T* (  more realistic store experience.) Tj
+T* () Tj
+T* (CONCLUSION) Tj
+T* () Tj
+T* (The Myntra-style store is a strong teaching project because it is easy to run, easy to) Tj
+T* (read, and already structured around meaningful frontend-backend separation. The next) Tj
+T* (phase should focus on improving realism: better data handling, richer interactions,) Tj
+T* (clearer technical reporting, and more polished UX. With those improvements, the project) Tj
+T* (can evolve from a good demo into a more complete portfolio-grade ecommerce example.) Tj
+ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 15 0 R /Resources << /Font << /F1 1 0 R >> >> >>
+endobj
+17 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+xref
+0 18
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000000182 00000 n 
+0000001981 00000 n 
+0000002107 00000 n 
+0000003997 00000 n 
+0000004123 00000 n 
+0000005847 00000 n 
+0000005973 00000 n 
+0000008117 00000 n 
+0000008244 00000 n 
+0000009988 00000 n 
+0000010116 00000 n 
+0000011762 00000 n 
+0000011890 00000 n 
+0000013395 00000 n 
+0000013523 00000 n 
+trailer
+<< /Size 18 /Root 17 0 R >>
+startxref
+13573
+%%EOF
