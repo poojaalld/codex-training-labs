@@ -1,0 +1,42 @@
+"Stack Trace","Why This Is Coming","Patch"
+"Trace 1: React render TypeError
+
+TypeError: Cannot read properties of undefined (reading 'items')
+    at Dashboard.render (src/components/Dashboard.jsx:42:18)
+    at Dashboard (src/components/Dashboard.jsx:40:11)
+    at renderWithHooks (node_modules/react-dom/cjs/react-dom.development.js:16305:18)
+    at mountIndeterminateComponent (node_modules/react-dom/cjs/react-dom.development.js:20074:13)
+    at beginWork (node_modules/react-dom/cjs/react-dom.development.js:21587:16)","The component is trying to read `items` from a value that is `undefined`. In simple terms, the data the UI expects was not ready or not passed in, but the code used it anyway.","In `src/components/Dashboard.jsx`, add a safe fallback before reading `items`. Example: `const items = props?.data?.items ?? [];` or guard the render with `if (!data) return null;`. Then render from the safe `items` array."
+"Trace 2: Hook dependency warning
+
+Warning: Mutable values like 'countRef.current' should not be used to compute derived data
+    at useCounter (src/hooks/useCounter.ts:24:12)
+    at Dashboard.useEffect (src/components/Dashboard.jsx:60:5)
+    at commitHookEffectListMount (node_modules/react-dom/cjs/react-dom.development.js:23150:26)
+    at commitPassiveMountOnFiber (node_modules/react-dom/cjs/react-dom.development.js:24926:11)","This warning happens because `countRef.current` is a mutable value. React does not track changes to it the same way it tracks state, so using it for derived values or dependencies can lead to stale or confusing behavior.","Move the derived value to React state or compute it from state instead of `ref.current`. If the value should trigger rerenders, replace the ref with `useState`. If the ref is only for storage, do not use `countRef.current` in dependency calculations."
+"Trace 3: Backend route crash
+
+TypeError: Cannot destructure property 'email' of 'req.body' as it is undefined.
+    at loginUser (src/routes/auth.js:18:11)
+    at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+    at next (node_modules/express/lib/router/route.js:144:13)
+    at Route.dispatch (node_modules/express/lib/router/route.js:114:3)
+    at ServerResponse.json (node_modules/express/lib/response.js:271:10)","The backend expected JSON data in `req.body`, but `req.body` is `undefined`. Most often this means the Express JSON middleware was not enabled or the client did not send JSON correctly.","Add `app.use(express.json())` before the route definitions. Also add a safe guard like `const { email, password } = req.body || {};` and return a `400` response when required fields are missing."
+"Trace 4: Missing module during startup
+
+Error: Cannot find module './controllers/userController'
+Require stack:
+- C:\Users\pooja\codex-training-labs\Codex-modules\modules\module-03-debugging-with-codex\labs\stack-trace-playground\backend\src\server.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1420:15)
+    at Module._load (node:internal/modules/cjs/loader:1226:27)
+    at Module.require (node:internal/modules/cjs/loader:1503:19)
+    at require (node:internal/modules/helpers:152:18)
+    at Object.<anonymous> (src/server.js:6:24)","Node tried to load `./controllers/userController`, but that file was not found at that path. Usually the filename is wrong, the folder path is wrong, or the file was never created.","Check `src/server.js` line 6 and fix the import path so it matches the real file location and filename exactly, including letter case. If the controller file is missing, create `src/controllers/userController.js` and export the expected function."
+"Trace 5: Port already in use
+
+Error: listen EADDRINUSE: address already in use :::4000
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Function.listen (node_modules/express/lib/application.js:635:24)
+    at Object.<anonymous> (src/server.js:38:5)","This happens because another process is already using port `4000`. The app cannot start when the same port is already occupied.","Stop the process already running on port `4000`, or change the app to use a different port. A common patch is `const PORT = process.env.PORT || 4000; app.listen(PORT, ...)` and then start the app with another port like `PORT=4001`."
