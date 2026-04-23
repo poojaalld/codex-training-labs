@@ -1,0 +1,18 @@
+Example 1: List processing
+
+```python
+def filter_and_sum(numbers, threshold):
+    filtered_numbers = [number for number in numbers if number >= threshold]
+    return sum(filtered_numbers)
+
+
+sample_numbers = [3, 8, 12, 1, 7, 15]
+result = filter_and_sum(sample_numbers, 8)
+
+print(result)  # Output: 35
+```
+
+This example turns the vague request "Write some code to process a list" into a specific task:
+- filter values greater than or equal to a threshold
+- sum the filtered values
+- show an example call and output

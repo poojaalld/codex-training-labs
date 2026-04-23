@@ -1,0 +1,5 @@
+
+> auth-backend-correct@1.0.0 dev
+> node src/server.js
+
+Auth backend listening on port 5000

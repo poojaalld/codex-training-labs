@@ -1,0 +1,10 @@
+Error: [31m  Failed to scan for dependencies from entries:
+  C:/Users/2000105127/codex-training-labs/day3-exercises/debug-broken-project/correct/frontend/index.html
+
+  [39mspawn EPERM
+    at ChildProcess.spawn (node:internal/child_process:420:11)
+    at Object.spawn (node:child_process:753:9)
+    at ensureServiceIsRunning (C:\Users\2000105127\codex-training-labs\day3-exercises\debug-broken-project\correct\frontend\node_modules\esbuild\lib\main.js:1975:29)
+    at Object.context (C:\Users\2000105127\codex-training-labs\day3-exercises\debug-broken-project\correct\frontend\node_modules\esbuild\lib\main.js:1874:33)
+    at prepareEsbuildScanner (file:///C:/Users/2000105127/codex-training-labs/day3-exercises/debug-broken-project/correct/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49576:24)
+    at async file:///C:/Users/2000105127/codex-training-labs/day3-exercises/debug-broken-project/correct/frontend/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:50174:26

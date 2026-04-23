@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Myntra-Style Store Website Documentation</title>
+  <style>
+    :root {
+      --bg: #f6f1ea;
+      --panel: #ffffff;
+      --ink: #1d2433;
+      --muted: #5f6675;
+      --brand: #d64a3a;
+      --accent: #ff9d4d;
+      --line: #ddd4ca;
+      --soft: #fff5eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(255, 157, 77, 0.18), transparent 22%),
+        linear-gradient(180deg, #fff8f1 0%, var(--bg) 100%);
+      line-height: 1.55;
+    }
+
+    .page {
+      width: 960px;
+      margin: 32px auto;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 40px 48px;
+      box-shadow: 0 18px 60px rgba(28, 34, 48, 0.08);
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 10px;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: 34px;
+      color: #151b28;
+    }
+
+    h2 {
+      margin-top: 28px;
+      padding-bottom: 8px;
+      font-size: 20px;
+      border-bottom: 2px solid #f1e2d1;
+    }
+
+    h3 {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #2a3346;
+    }
+
+    p, li {
+      font-size: 14px;
+      color: var(--ink);
+    }
+
+    .lede {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 780px;
+    }
+
+    .hero {
+      padding: 22px 24px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #fff2e2, #fff8f3 55%, #fff);
+      border: 1px solid #f1ddca;
+      margin-bottom: 24px;
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .meta-card {
+      padding: 14px 16px;
+      background: white;
+      border: 1px solid #eddccd;
+      border-radius: 14px;
+    }
+
+    .meta-card strong {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--brand);
+      margin-bottom: 6px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .panel {
+      padding: 16px 18px;
+      background: #fffdfb;
+      border: 1px solid #eadfd4;
+      border-radius: 16px;
+    }
+
+    .callout {
+      padding: 16px 18px;
+      border-left: 5px solid var(--brand);
+      background: var(--soft);
+      border-radius: 12px;
+      margin: 16px 0;
+    }
+
+    code, pre {
+      font-family: Consolas, "Courier New", monospace;
+    }
+
+    pre {
+      padding: 14px 16px;
+      background: #221f1d;
+      color: #fff6ee;
+      border-radius: 14px;
+      overflow-x: auto;
+      font-size: 12px;
+    }
+
+    ul, ol {
+      padding-left: 20px;
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .page {
+        width: auto;
+        margin: 0;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 12mm;
+      }
+
+      h2, h3, .panel, .meta-card, .callout {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <h1>Myntra-Style Store Website Documentation</h1>
+      <p class="lede">
+        This document explains the current website in <code>module4/myntra-style-store</code> and
+        summarizes the improvement ideas listed in <code>module4/top-up-ideas</code>. It is designed
+        for learners, reviewers, and mentors who need a quick but complete understanding of the project.
+      </p>
+      <div class="meta">
+        <div class="meta-card">
+          <strong>Frontend</strong>
+          React 19 + Vite single-page storefront
+        </div>
+        <div class="meta-card">
+          <strong>Backend</strong>
+          Express 5 API serving curated catalog data
+        </div>
+        <div class="meta-card">
+          <strong>Goal</strong>
+          Make the website and next improvements easy to understand
+        </div>
+      </div>
+    </section>
+
+    <h2>Project Snapshot</h2>
+    <p>
+      The project is a compact full-stack demo inspired by Myntra's merchandising style. The frontend fetches
+      product data from an Express backend and renders a polished landing page with a hero section, category cards,
+      product spotlight cards, and an architecture summary block. The stack is intentionally small, which makes it
+      ideal for training and codebase-understanding exercises.
+    </p>
+
+    <h2>Folder Structure</h2>
+    <pre>module4/
+  myntra-style-store/
+    backend/
+      index.js
+      package.json
+    frontend/
+      package.json
+      src/
+        main.jsx
+        App.jsx
+        App.css
+        index.css
+  top-up-ideas/
+    modification-ideas.md
+    docs/</pre>
+
+    <h2>What the Website Currently Does</h2>
+    <div class="grid">
+      <div class="panel">
+        <h3>Frontend behavior</h3>
+        <ul>
+          <li>Shows a sticky header with navigation links and CTA buttons.</li>
+          <li>Displays a hero section with runtime status and catalog banner text.</li>
+          <li>Builds a category panel from fetched product categories.</li>
+          <li>Renders a product grid using reusable product cards.</li>
+          <li>Shows loading and error states based on API availability.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Backend behavior</h3>
+        <ul>
+          <li>Exposes <code>GET /api/products</code>.</li>
+          <li>Stores sample data in memory.</li>
+          <li>Formats prices using Indian currency formatting.</li>
+          <li>Returns a banner message and curated product list.</li>
+          <li>Allows cross-origin requests with <code>cors()</code>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Architecture Overview</h2>
+    <div class="grid">
+      <div class="panel">
+        <h3>Frontend flow</h3>
+        <ol>
+          <li><code>main.jsx</code> mounts the React app.</li>
+          <li><code>App.jsx</code> owns layout, state, and fetch logic.</li>
+          <li><code>useEffect</code> calls <code>http://localhost:5174/api/products</code>.</li>
+          <li>The app stores <code>products</code>, <code>banner</code>, and <code>status</code>.</li>
+          <li><code>useMemo</code> derives unique categories from the product list.</li>
+          <li>The UI updates based on loading, success, or error state.</li>
+        </ol>
+      </div>
+      <div class="panel">
+        <h3>Backend flow</h3>
+        <ol>
+          <li><code>index.js</code> creates the Express server.</li>
+          <li><code>cors()</code> and <code>express.json()</code> middleware are applied.</li>
+          <li>A hard-coded product array acts as the temporary catalog.</li>
+          <li>The API adds <code>priceFormatted</code> to every product.</li>
+          <li>The response returns <code>banner</code> and <code>curated</code>.</li>
+        </ol>
+      </div>
+    </div>
+
+    <h2>Data Flow</h2>
+    <pre>Express product data
+  -> /api/products response
+  -> React fetch in App.jsx
+  -> setBanner / setProducts / setStatus
+  -> category extraction with useMemo
+  -> product cards and category panel render</pre>
+
+    <div class="callout">
+      The project demonstrates a clean separation between backend data preparation, frontend state handling,
+      and CSS-driven presentation. That is why it works well as a teaching example.
+    </div>
+
+    <h2>Key Files and Responsibilities</h2>
+    <ul>
+      <li><code>frontend/src/main.jsx</code>: React entry point and root mounting.</li>
+      <li><code>frontend/src/App.jsx</code>: page layout, fetch logic, derived categories, and rendering.</li>
+      <li><code>frontend/src/App.css</code>: component and section styling.</li>
+      <li><code>frontend/src/index.css</code>: global variables, fonts, and base styles.</li>
+      <li><code>backend/index.js</code>: Express setup, product data, and API response shaping.</li>
+    </ul>
+
+    <h2>Current Strengths</h2>
+    <ul>
+      <li>Simple and understandable full-stack architecture.</li>
+      <li>Good example of React + API integration for beginners.</li>
+      <li>Responsive layout already exists.</li>
+      <li>Reusable product card pattern is data-driven.</li>
+      <li>Server-side currency formatting keeps display logic consistent.</li>
+    </ul>
+
+    <h2>Current Gaps and Limitations</h2>
+    <ul>
+      <li>The catalog is hard-coded and not persisted in a file or database.</li>
+      <li>No cart, filters, authentication, or checkout flow exists yet.</li>
+      <li>Backend logging and tests are missing.</li>
+      <li>Error handling is minimal.</li>
+      <li>Some visible text has encoding issues such as <code>Â·</code> and <code>â€¦</code>.</li>
+    </ul>
+
+    <h2>Improvement Ideas from Top-Up Notes</h2>
+    <div class="grid">
+      <div class="panel">
+        <h3>Feature ideas</h3>
+        <ul>
+          <li>Mega menu for Indian festivals</li>
+          <li>Filterable product drawer</li>
+          <li>Localized rotating offer banner</li>
+          <li>Mini cart with <code>localStorage</code></li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Engineering ideas</h3>
+        <ul>
+          <li>Move data to JSON or mock DB</li>
+          <li>Add request logging</li>
+          <li>Validate API response with Jest or scripts</li>
+          <li>Capture lint or Lighthouse findings in docs</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Recommended Priority Order</h2>
+    <ol>
+      <li>Fix UI text encoding and copy consistency.</li>
+      <li>Move the backend catalog to a JSON file and add request logging.</li>
+      <li>Add a filterable product drawer.</li>
+      <li>Add a mini cart with saved local state.</li>
+      <li>Add a rotating localized banner.</li>
+      <li>Add a mega menu with accessibility states.</li>
+      <li>Run lint and performance checks, then update reports.</li>
+    </ol>
+
+    <h2>Local Run Instructions</h2>
+    <pre>cd module4/myntra-style-store/backend
+npm install
+npm start
+
+cd module4/myntra-style-store/frontend
+npm install
+npm run dev</pre>
+
+    <h2>Conclusion</h2>
+    <p>
+      The Myntra-style store is a strong learning project because the complete request-response cycle is easy to
+      trace from frontend UI to backend API. The current implementation already looks polished, but the improvement
+      notes give a clear path toward a more realistic ecommerce experience. This makes the project ideal for both
+      code understanding and guided enhancement work.
+    </p>
+
+    <p class="footer-note">
+      Prepared from the code in <code>module4/myntra-style-store</code> and the ideas in
+      <code>module4/top-up-ideas/modification-ideas.md</code>.
+    </p>
+  </div>
+</body>
+</html>

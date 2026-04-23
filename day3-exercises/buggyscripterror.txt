@@ -1,0 +1,21 @@
+Buggy Scripts Error Summary
+
+1. calculateBonus.js
+Error: ReferenceError: Cannot access 'BONUS_RATES' before initialization
+Cause: `calculateBonus()` was called before the `BONUS_RATES` constant was initialized.
+
+2. configMerge.js
+Error: ReferenceError: overrides is not defined
+Cause: The script tried to spread `overrides` into the merged object without defining it first.
+
+3. emailScheduler.js
+Error: SyntaxError: await is only valid in async functions and the top level bodies of modules
+Cause: `await sendEmail(message)` was used inside `scheduleEmail()` even though the function was not declared as `async`.
+
+4. retryHandler.js
+Error: RangeError: Invalid array length
+Cause: The default retry count evaluated to `-2`, and `new Array(-2)` is invalid.
+
+5. validateUser.js
+Error: TypeError: Cannot read properties of undefined (reading 'roles')
+Cause: The script called `describeAccess(user)` even when no user payload was provided, so `user` was `undefined`.
